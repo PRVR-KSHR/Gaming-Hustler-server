@@ -788,7 +788,7 @@ async function run() {
 run().catch(console.dir);
 
 app.get("/", (req, res) => {
-  res.send("Yoga Master Server is running!");
+  res.send("Gaming-Hustler Server is running!");
 });
 
 // Listen

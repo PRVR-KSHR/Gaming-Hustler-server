@@ -232,27 +232,29 @@ async function run() {
       const result = await userCollection.deleteOne(query);
       res.send(result);
     });
-    // // UPDATE USER
-    // app.put("/update-user/:id", verifyJWT, verifyAdmin, async (req, res) => {
-    //   const id = req.params.id;
-    //   const updatedUser = req.body;
-    //   const filter = { _id: new ObjectId(id) };
-    //   const options = { upsert: true };
-    //   const updateDoc = {
-    //     $set: {
-    //       name: updatedUser.name,
-    //       email: updatedUser.email,
-    //       role: updatedUser.option,
-    //       address: updatedUser.address,
-    //       phone: updatedUser.phone,
-    //       about: updatedUser.about,
-    //       photoUrl: updatedUser.photoUrl,
-    //       skills: updatedUser.skills ? updatedUser.skills : null,
-    //     },
-    //   };
-    //   const result = await userCollection.updateOne(filter, updateDoc, options);
-    //   res.send(result);
-    // });
+
+     // UPDATE USER
+     app.put('/update-user/:id', verifyJWT, verifyAdmin, async (req, res) => {
+      const id = req.params.id;
+      const updatedUser = req.body;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updateDoc = {
+          $set: {
+              name: updatedUser.name,
+              email: updatedUser.email,
+              role: updatedUser.option,
+              address: updatedUser.address,
+              phone: updatedUser.phone,
+              about: updatedUser.about,
+              photoUrl: updatedUser.photoUrl,
+              skills: updatedUser.skills ? updatedUser.skills : null,
+          }
+      }
+      const result = await userCollection.updateOne(filter, updateDoc, options);
+      res.send(result);
+  })
+
 
     app.put('/update-class/:id', verifyJWT, verifyInstructor, async (req, res) => {
       try {
@@ -389,26 +391,6 @@ async function run() {
         res.status(500).send({ error: true, message: "Error rejecting team" });
       }
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
 
     // GET ALL CLASSES
     app.get("/classes", async (req, res) => {
@@ -788,7 +770,7 @@ async function run() {
 run().catch(console.dir);
 
 app.get("/", (req, res) => {
-  res.send("Yoga Master Server is running!");
+  res.send("Gaming-Hustler Server is running!");
 });
 
 // Listen
